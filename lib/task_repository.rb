@@ -3,14 +3,17 @@ require 'sequel'
 class TaskRepository
   def initialize(db)
     @db = db
+    @table = @db[:tasks]
   end
   def create(task)
-    tasks = @db[:tasks]
-    tasks.insert(task)
+    @table.insert(task)
   end
 
   def all
-    tasks = @db[:tasks]
-    tasks.to_a
+    @table.to_a
+  end
+
+  def update(id, task)
+    @table.where(:id => id).update(task)
   end
 end
