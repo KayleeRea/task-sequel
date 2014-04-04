@@ -20,4 +20,8 @@ class TaskRepository
   def find(id)
     @table.where(:id => id).to_a
   end
+
+  def delete(id)
+    @table.where(:id => id).delete
+  end
 end

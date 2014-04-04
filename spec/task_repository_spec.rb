@@ -15,7 +15,7 @@ describe TaskRepository do
   end
 
   it 'creates a new task' do
-    @tasks.create(:name => 'homework')
+    @tasks.create(name: 'homework')
     @tasks.create(name: 'grocery store')
     expect(@tasks.all).to eq(
                             [{:id => 1, :name => 'homework', :complete => false},
@@ -24,13 +24,20 @@ describe TaskRepository do
 
   it 'updates a task' do
     @tasks.create(name: 'homework')
-    @tasks.update(1, :name => 'workout', :complete => true)
+    @tasks.update(1, name:'workout', complete: false)
     expect(@tasks.all).to eq(
-                            [{:id => 1, :name => 'workout', :complete => true}])
+                            [{:id => 1, :name => 'workout', :complete => false}])
   end
   it 'allows for finding a task by id' do
     @tasks.create(name: 'workout')
     expect(@tasks.find(1)).to eq(
                                [{:id => 1, :name => 'workout', :complete =>false}])
+  end
+  it 'deletes a task' do
+    @tasks.create(name: 'homework')
+    @tasks.create(name: 'workout')
+    @tasks.delete(1)
+    expect(@tasks.all).to eq(
+      [{ :id => 2, :name => 'workout', :complete => false}])
   end
 end
