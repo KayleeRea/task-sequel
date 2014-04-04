@@ -16,4 +16,8 @@ class TaskRepository
   def update(id, task)
     @table.where(:id => id).update(task)
   end
+
+  def find(id)
+    @table.where(:id => id).to_a
+  end
 end
